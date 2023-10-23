@@ -12,12 +12,21 @@
         <li class="nav-item">
           <%= link_to "Create group", root_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Sign up", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Log in", root_path, class: "nav-link" %>
-        </li>
+        <% if not user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Edit profile", edit_user_registration_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
